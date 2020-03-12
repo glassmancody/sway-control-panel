@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/gtkmm/sway-control-panel/">
+    <file preprocess="xml-stripblanks">ui/main_window.glade</file>
+	  <file>img/icon.svg</file>
+  </gresource>
+</gresources>

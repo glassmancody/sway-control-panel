@@ -1,0 +1,34 @@
+image: archlinux
+packages:
+  - cairo
+  - gdk-pixbuf2
+  - json-c
+  - libinput
+  - libxcb
+  - libxkbcommon
+  - meson
+  - pango
+  - wayland
+  - wayland-protocols
+  - xcb-util-image
+  - xorg-server-xwayland
+sources:
+  - https://github.com/swaywm/sway
+  - https://github.com/swaywm/wlroots
+  - https://git.sr.ht/~sircmpwn/scdoc
+tasks:
+  - scdoc: |
+      cd scdoc
+      make PREFIX=/usr
+      sudo make install PREFIX=/usr
+  - wlroots: |
+      cd wlroots
+      meson --prefix=/usr build -Dexamples=false
+      ninja -C build
+      sudo ninja -C build install
+  - setup: |
+      cd sway
+      meson build -Dauto_features=enabled
+  - build: |
+      cd sway
+      ninja -C build

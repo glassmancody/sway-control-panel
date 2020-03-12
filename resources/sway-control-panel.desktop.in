@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=@PROJECT_DISPLAY_NAME@
+Comment=A GTK-3 application to interface with the sway configuration
+Exec=@PROJECT_NAME@
+Icon=@PROJECT_NAME@
+Type=Application
+Categories=GTK;Utility;
+Terminal=false

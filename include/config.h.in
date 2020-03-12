@@ -1,0 +1,61 @@
+#pragma once
+
+#include "log.h"
+#include <string>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <gtkmm-3.0/gtkmm.h>
+
+namespace sway
+{
+
+struct _app
+{
+    static constexpr char name          [] = @PROJECT_NAME@;
+    static constexpr char display_name  [] = @PROJECT_DISPLAY_NAME@;
+    static constexpr char gtk_id        [] = @PROJECT_GTK_ID@;
+    static constexpr char resource_root [] = @PROJECT_RESOURCE_ROOT_PATH@;
+    static constexpr char version       [] = @PROJECT_VERSION@;
+};
+
+    /*
+        | sway-control-panel |
+        |--------------------| profiles | 
+        |--------------------|----------| default
+        |--------------------|----------| sway    | <1_profile, 2_profile,..>
+        |--------------------|----------| bar     | <1_profile, 2_profile,..>   
+        |--------------------|----------| input   | <1_profile, 2_profile,..>   
+        |--------------------|----------| output  | <1_profile, 2_profile,..>
+
+        sway-control-panel/profiles/default simply includes the currently selected includes the 
+
+        include sway/profile
+        include bar/profile
+        include input/profile
+        include output/profile
+    */
+
+/*     std::string get_data_dir()
+    {
+        auto base = build_filename(Glib::get_user_data_dir(), name);
+        log.info("using local data dir: '", base, "'");
+        if (!Glib::file_test(base, Glib::FILE_TEST_EXISTS))
+        {
+            log.info("user data dir does not exist, attempting to create it...");
+            if (mkdir(base.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == 0)
+            {
+                log.info("successfully created user data dir");
+                return base;
+            }
+            else
+            {
+                log.error("failed creating user data dir");
+                return {};
+            } 
+        }
+    } */
+
+extern const _app app;
+
+} // namespace sway

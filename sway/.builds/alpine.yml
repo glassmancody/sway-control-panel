@@ -1,0 +1,42 @@
+image: alpine/edge
+packages:
+  - cairo-dev
+  - eudev-dev
+  - gdk-pixbuf-dev
+  - json-c-dev
+  - libevdev-dev
+  - libinput-dev
+  - libxcb-dev
+  - libxkbcommon-dev
+  - mesa-dev
+  - meson
+  - pango-dev
+  - pixman-dev
+  - wayland-dev
+  - wayland-protocols
+  - xcb-util-image-dev
+  - xorg-server-xwayland
+sources:
+  - https://github.com/swaywm/sway
+  - https://github.com/swaywm/wlroots
+  - https://git.sr.ht/~sircmpwn/scdoc
+tasks:
+  - scdoc: |
+      cd scdoc
+      make PREFIX=/usr
+      sudo make install PREFIX=/usr
+  - wlroots: |
+      cd wlroots
+      meson --prefix=/usr build -Dexamples=false
+      ninja -C build
+      sudo ninja -C build install
+  - setup: |
+      cd sway
+      meson build -Dauto_features=enabled -Dtray=disabled
+  - build: |
+      cd sway
+      ninja -C build
+  - build-no-xwayland: |
+      cd sway
+      meson configure build -Dxwayland=disabled
+      ninja -C build
